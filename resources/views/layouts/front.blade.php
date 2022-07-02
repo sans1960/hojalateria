@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
+    <link href="{{ asset('img/icon.jpg') }}" rel="icon" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/bootstrap.bundle.js') }}" defer></script>
@@ -19,12 +20,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
 <body>
 
         <nav class="navbar navbar-expand-md navbar-dark bg-danger shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('index')}}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                     <img src="{{ asset('img/logo_footer.png') }}" alt="">
                 </a>
@@ -35,8 +37,49 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Catalogo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Contacto</a>
+                        </li>
                     </ul>
+                      <ul class="navbar-nav me-auto">
+                        <a href="" class=" nav-link mx-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Shop
+                          </a>
+                      </ul>
+
+
+
+                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
+                           <div class="modal-content">
+                             <div class="modal-header bg-danger">
+                               <img src="{{ asset('img/logo_footer.png') }}" alt="" class="mx-auto">
+
+                             </div>
+                             <div class="modal-body text-center">
+                                <p>Debes estar logeado para acceder a la Tienda online</p>
+                               <a class="nav-link text-success fw-bold" href="{{ route('login') }}">login</a>
+                               <a class="nav-link text-success fw-bold" href="{{ route('register') }}">register</a>
+                             </div>
+                             <div class="modal-footer bg-danger">
+                               <button type="button" class="btn btn-success rounded btn-sm" data-bs-dismiss="modal">Close</button>
+
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+
+
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -76,15 +119,10 @@
                 </div>
             </div>
         </nav>
-
-     <div class="container d-flex justify-content-around flex-column align-items-md-center">
-        <img src="{{ asset('img/Campanas-extractoras-eolicoos-1140x380.jpg') }}" alt="" class="mt-3 mb-3 img-fluid d-block mx-auto">
-        <img src="{{ asset('img/Extractores-eolicos-eolicoos-1140x380.jpg') }}" alt="" class="mt-3 mb-3 img-fluid d-block mx-auto">
-
-     </div>
+        @yield('content')
 <footer class="bg-danger d-flex justify-content-center align-items-center p-3">
 
- <img src="{{ asset('img/logo_footer.png') }}" alt="">
+   <img src="{{ asset('img/logo_footer.png') }}" alt="">
 
 </footer>
 </body>

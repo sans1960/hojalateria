@@ -1,3 +1,3 @@
 # Hojalateria
 
-### E-commerce width laravel 9 & bootstrap 5
+### E-commerce with laravel 9 & bootstrap 5
