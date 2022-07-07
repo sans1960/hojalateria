@@ -25,7 +25,7 @@
 
                     <div class="row mb-3">
                         <div class="col-md-4 mx-auto">
-                        <button type="submit" class="btn btn-primary d-block mx-auto">add</button>
+                        <button type="submit" class="btn btn-primary d-block mx-auto"> <i class="bi bi-plus-circle"></i></button>
                     </div>
                     </div>
                 </form>
