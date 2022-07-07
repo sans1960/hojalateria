@@ -12,4 +12,7 @@ class Category extends Model
     public function getRouteKeyName(){
         return 'slug';
     }
+    public function product(){
+        return $this->hasMany(Product::class);
+    }
 }
