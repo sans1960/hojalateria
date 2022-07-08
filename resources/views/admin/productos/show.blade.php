@@ -19,7 +19,7 @@
                       <p class="card-text">{{ $producto->descripcion }}</p>
                       <div class="row">
                            <div class="col">
-                            {{ $producto->largo }}
+                            {{ $producto->largo }} metro
                            </div>
                            <div class="col">
                             {{ $producto->diametro }} pulgadas
@@ -30,11 +30,11 @@
                         ${{ $producto->precio}}
                         </div>
                         <div class="col">
-                            iva {{ $producto->iva}} %
+                           $ {{ round($producto->precio*$producto->iva/100,2)}} iva
                             </div>
 
                    </div>
-
+                         <p class="fw-bold text-danger">TOTAL: $ {{round($producto->precio +  $producto->precio*$producto->iva/100,2)}}</p>
                     </div>
                   </div>
                 </div>

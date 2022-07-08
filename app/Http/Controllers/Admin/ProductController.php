@@ -74,9 +74,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $producto)
     {
-        return view('admin.productos.edit');
+        $categories = Category::all();
+        return view('admin.productos.edit',compact('producto','categories'));
     }
 
     /**
@@ -86,9 +87,26 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $producto)
     {
-        //
+        if($request->hasFile('imagen')){
+            unlink(storage_path('app/public/producto/'.$producto->imagen));
+            $request->imagen->store('producto','public');
+            $producto->imagen = $request->imagen->hashName();
+        }
+        $producto->name = $request->name;
+        $producto->slug = Str::slug($request->name);
+        $producto->category_id = $request->category_id;
+        $producto->referencia = $request->referencia;
+        $producto->descripcion = $request->descripcion;
+        $producto->comentarios = $request->comentarios;
+        $producto->largo = $request->largo;
+        $producto->diametro = $request->diametro;
+        $producto->precio = $request->precio;
+        $producto->iva = $request->iva;
+        $producto->update();
+        return redirect()->route('admin.productos.index')->with('message','Producto actualizado') ;
+
     }
 
     /**
@@ -97,8 +115,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $producto)
     {
-        //
+        if(file_exists(storage_path('app/public/producto/'.$producto->imagen))){
+            unlink(storage_path('app/public/producto/'.$producto->imagen));
+
+        }
+        $producto->delete();
+        return redirect()->route('admin.productos.index')->with('message','Producto Eliminado');
     }
 }
