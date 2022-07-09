@@ -16,7 +16,16 @@
                       <p class="card-text">$ {{ $product->precio }}.</p>
                       <div class="d-flex justify-content-around align-items-center">
                         <a href="{{ route('home.shop.show',$product) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostrar Detalles" class="text-success"><i class="bi bi-eye-fill"  style="font-size: 1.5em;"></i></a>
-                        <a href="#" class="text-success"><i class="bi bi-cart-plus-fill" data-bs-toggle="tooltip" data-bs-placement="top" title="Añadir a la cesta" style="font-size: 1.5em;"></i></a>
+                        <form action="{{ route('cart.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" value="{{ $product->id }}" name="id">
+                            <input type="hidden" value="{{ $product->name }}" name="name">
+                            <input type="hidden" value="{{ $product->precio }}" name="price">
+                            <input type="hidden" value="{{ $product->imagen }}"  name="image">
+                            <input type="hidden" value="1" name="quantity">
+                            <button type="submit" class="btn btn-success"><i class="bi bi-cart-plus-fill"></i></button>
+                        </form>
+
                       </div>
 
 

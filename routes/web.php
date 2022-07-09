@@ -8,6 +8,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShopController;
+use App\Http\Controllers\Admin\CartController;
 
 
 /*
@@ -26,6 +27,11 @@ Route::get('/', [FrontController::class,'index'])->name('index');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('cart', [CartController::class, 'cartList'])->middleware('auth')->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->middleware('auth')->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->middleware('auth')->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->middleware('auth')->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->middleware('auth')->name('cart.clear');
 Route::get('home/shop',[ShopController::class,'index'])->middleware('auth')->name('home.shop.index');
 Route::get('home/shop/categoria/{categoria}',[ShopController::class,'category'])->middleware('auth')->name('home.shop.categoria');
 Route::get('home/shop/{product}',[ShopController::class,'showProduct'])->middleware('auth')->name('home.shop.show');

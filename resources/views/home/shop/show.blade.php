@@ -5,8 +5,8 @@
 @section('content')
 
   <div class="container">
-    <div class="row mt-5">
-        <div class="col-md-6 mt-5 mx-auto">
+    <div class="row mt-3">
+        <div class="col-md-6 mx-auto">
             <div class="card mb-3">
                 <div class="row g-0">
                   <div class="col-md-4">
@@ -39,10 +39,22 @@
                     </div>
                   </div>
         </div>
+        <div class="d-flex justify-content-center mb-5">
+            <form action="{{ route('cart.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" value="{{ $product->id }}" name="id">
+                <input type="hidden" value="{{ $product->name }}" name="name">
+                <input type="hidden" value="{{ $product->precio }}" name="price">
+                <input type="hidden" value="{{ $product->imagen }}"  name="image">
+                <input type="hidden" value="1" name="quantity">
+                <button type="submit" class="btn btn-success"><i class="bi bi-cart-plus-fill"></i></button>
+            </form>
+        </div>
+
 
     </div>
-    <div class="row">
-        <div class="col-md-4 mx-auto d-flex justify-content-center">
+    <div class="row mt-5">
+        <div class="col-md-4 mt-5 mx-auto d-flex justify-content-center">
             <a class="text-success" href="{{ url()->previous()}}"><i style="font-size: 1.5em" class="bi bi-arrow-left-square-fill"></i></a>
 
         </div>

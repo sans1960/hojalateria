@@ -37,9 +37,15 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav mx-auto fs-3">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home.shop.index') }}">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cart.list') }}">
+                                <i class="bi bi-cart3" ></i>
+                                {{ Cart::getTotalQuantity()}}
+                            </a>
                         </li>
 
                     </ul>
